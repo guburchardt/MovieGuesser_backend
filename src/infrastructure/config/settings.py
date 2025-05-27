@@ -1,11 +1,15 @@
 import os
 from dataclasses import dataclass
+from dotenv import load_dotenv
+
+# Carrega as variáveis de ambiente do arquivo .env
+load_dotenv()
 
 @dataclass
 class Settings:
-    TMDB_API_KEY: str = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjZGJlODA2ZGU5NDhlYjNlYmIxMzhmMTY4YmZkNTEwYiIsIm5iZiI6MTc0NjgwMTkyMy43NzMsInN1YiI6IjY4MWUxNTAzZWQ1YzY5ZGIzZjg4YzhlYSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.7HtJl3EjRHwKpndZFf3q7WJ3SB9J1liokbwJXmoFnBQ"
-    TMDB_BASE_URL: str = "https://api.themoviedb.org/3"
-    TMDB_IMAGE_BASE_URL: str = "https://image.tmdb.org/t/p/w500"
-    DEBUG: bool = True
+    TMDB_API_KEY: str = os.getenv('TMDB_API_KEY', '')
+    TMDB_BASE_URL: str = os.getenv('TMDB_BASE_URL', 'https://api.themoviedb.org/3')
+    TMDB_IMAGE_BASE_URL: str = os.getenv('TMDB_IMAGE_BASE_URL', 'https://image.tmdb.org/t/p/w500')
+    DEBUG: bool = os.getenv('DEBUG', 'True').lower() == 'true'
 
 settings = Settings() 
