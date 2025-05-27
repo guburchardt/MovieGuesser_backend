@@ -1,4 +1,5 @@
 import requests
+import random
 from typing import List, Optional
 from src.domain.entities.movie import Movie
 from src.domain.repositories.movie_repository import MovieRepository
@@ -12,7 +13,9 @@ class TMDBClient(MovieRepository):
         }
     
     async def get_random_movies(self, count: int) -> List[Movie]:
-        page = 1  # Você pode implementar a lógica de página aleatória aqui
+        # Seleciona uma página aleatória entre 1 e 500
+        page = random.randint(1, 500)
+        
         response = requests.get(
             f"{settings.TMDB_BASE_URL}/discover/movie",
             params={
